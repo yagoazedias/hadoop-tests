@@ -29,15 +29,19 @@ public class ContaPalavra {
             InterruptedException, ClassNotFoundException {
  
         // Captura o parâmetros passados após o nome da Classe driver.
-        Path inputPath = new Path(args[0]);
-        Path outputDir = new Path(args[1]);
+        String limit = args[0];
+        Path inputPath = new Path(args[1]);
+        Path outputDir = new Path(args[2]);
  
         // Criar uma configuração
         Configuration conf = new Configuration(true);
+        conf.set("limit", limit);
+
  
         // Criar o job
         Job job = new Job(conf, "ContaPalavras");
         job.setJarByClass(ContaPalavra.class);
+
  
         // Definir classes para Map e Reduce
         job.setMapperClass(ContaPalavraMapper.class);
